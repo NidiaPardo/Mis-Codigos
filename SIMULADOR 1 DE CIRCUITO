@@ -1,0 +1,48 @@
+// C++ code
+//
+
+// incluye el código de la biblioteca:
+#include <LiquidCrystal.h>
+
+// Define los pines del TMP36
+const int tempPin = A0;
+
+// Define los pines del potenciometro
+const int potPin = A1;
+
+// Define los pines del LCD
+const int rs = 12;
+const int en = 11;
+const int d4 = 5;
+const int d5 = 4;
+const int d6 = 3;
+const int d7 = 2;
+
+LiquidCrystal lcd(rs, en, d4, d5, d6, d7);
+
+void setup() {
+  lcd.begin(16, 2);
+}
+
+void loop() {
+  // Lee la temperatura del TMP36
+  int temp = analogRead(tempPin);
+  // Convierte la temperatura a grados Celsius
+  float temperature = (temp * 5.0 / 1024.0) - 50.0;
+  
+  // Lee el valor del potenciometro
+  int potValue = analogRead(potPin);
+  
+  // Muestra la temperatura y el valor del potenciometro en el LCD
+  lcd.setCursor(0, 0);
+  lcd.print("Temperatura: ");
+  lcd.setCursor(0, 1);
+  lcd.print(temperature);
+  lcd.setCursor(8, 1);
+  lcd.print("Pot: ");
+  lcd.setCursor(12, 1);
+  lcd.print(potValue);
+  
+  delay(1000);
+}
+    
